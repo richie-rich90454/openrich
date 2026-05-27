@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { Editor } from '@openrich/react';
 import { StarterKit } from '@openrich/starter-kit';
-import { ThemeToggle } from './theme-toggle';
-import { LocaleSelector } from './locale-selector';
+import { useState } from 'react';
 import { EditableToggle } from './editable-toggle';
+import { LocaleSelector } from './locale-selector';
+import { ThemeToggle } from './theme-toggle';
 
 const INITIAL_CONTENT = '<h1>Hello, OpenRich!</h1><p>Start typing here...</p>';
 const LONG_CONTENT = `<h2>Embedded anywhere</h2>
