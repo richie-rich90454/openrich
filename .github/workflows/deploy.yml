@@ -34,7 +34,7 @@ jobs:
         run: npm run docs:build
 
       - name: Build playground
-        run: cd playground && npm run build
+        run: cd playground && VITE_BASE_URL=/openrich/playground/ npm run build
 
       - name: Combine into publish directory
         run: |

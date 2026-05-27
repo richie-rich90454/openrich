@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress';
 
 export default defineConfig({
+  base: '/openrich/',
+  cleanUrls: true,
   title: 'OpenRich',
   description: 'Universal rich-text editor — framework-agnostic core with bindings for React, Vue, Svelte, Solid, and vanilla JS',
   themeConfig: {
