@@ -1,30 +1,30 @@
 {
-  "compilerOptions": {
-    "target": "ES2015",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "jsx": "react-jsx",
-    "paths": {
-      "@openrich/core": ["./packages/core/src"],
-      "@openrich/react": ["./packages/react/src"],
-      "@openrich/vue": ["./packages/vue/src"],
-      "@openrich/svelte": ["./packages/svelte/src"],
-      "@openrich/solid": ["./packages/solid/src"],
-      "@openrich/vanilla": ["./packages/vanilla/src"],
-      "@openrich/extensions": ["./packages/extensions/src"],
-      "@openrich/starter-kit": ["./packages/extensions-starter-kit/src"],
-      "@openrich/ssr-utils": ["./packages/ssr-utils/src"]
-    }
-  },
-  "exclude": ["node_modules", "dist", ".turbo"]
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noImplicitOverride": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "jsx": "react-jsx",
+        "paths": {
+            "@openrich/core": ["./packages/core/src"],
+            "@openrich/react": ["./packages/react/src"],
+            "@openrich/vue": ["./packages/vue/src"],
+            "@openrich/svelte": ["./packages/svelte/src"],
+            "@openrich/solid": ["./packages/solid/src"],
+            "@openrich/vanilla": ["./packages/vanilla/src"],
+            "@openrich/extensions": ["./packages/extensions/src"],
+            "@openrich/starter-kit": ["./packages/extensions-starter-kit/src"],
+            "@openrich/ssr-utils": ["./packages/ssr-utils/src"]
+        }
+    },
+    "exclude": ["node_modules", "dist", ".turbo"]
 }

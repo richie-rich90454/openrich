@@ -1,4 +1,4 @@
-import type { Editor } from '@tiptap/core';
+import type { Editor } from "@tiptap/core";
 
 /* ------------------------------------------------------------------ */
 /*  The extension-specific commands (toggleBold, setImage, etc.) are   */
@@ -8,61 +8,58 @@ import type { Editor } from '@tiptap/core';
 /* ------------------------------------------------------------------ */
 
 export function toggleBold(editor: Editor): void {
-  (editor.chain().focus() as any).toggleBold().run();
+    (editor.chain().focus() as any).toggleBold().run();
 }
 
 export function toggleItalic(editor: Editor): void {
-  (editor.chain().focus() as any).toggleItalic().run();
+    (editor.chain().focus() as any).toggleItalic().run();
 }
 
 export function toggleUnderline(editor: Editor): void {
-  if ((editor.can() as any).toggleUnderline()) {
-    (editor.chain().focus() as any).toggleUnderline().run();
-  }
+    if ((editor.can() as any).toggleUnderline()) {
+        (editor.chain().focus() as any).toggleUnderline().run();
+    }
 }
 
 export function toggleStrike(editor: Editor): void {
-  (editor.chain().focus() as any).toggleStrike().run();
+    (editor.chain().focus() as any).toggleStrike().run();
 }
 
 export function toggleHeading(editor: Editor, level: 1 | 2 | 3 | 4 | 5 | 6): void {
-  (editor.chain().focus() as any).toggleHeading({ level }).run();
+    (editor.chain().focus() as any).toggleHeading({ level }).run();
 }
 
 export function toggleBulletList(editor: Editor): void {
-  (editor.chain().focus() as any).toggleBulletList().run();
+    (editor.chain().focus() as any).toggleBulletList().run();
 }
 
 export function toggleOrderedList(editor: Editor): void {
-  (editor.chain().focus() as any).toggleOrderedList().run();
+    (editor.chain().focus() as any).toggleOrderedList().run();
 }
 
 export function toggleBlockquote(editor: Editor): void {
-  (editor.chain().focus() as any).toggleBlockquote().run();
+    (editor.chain().focus() as any).toggleBlockquote().run();
 }
 
 export function toggleCodeBlock(editor: Editor): void {
-  (editor.chain().focus() as any).toggleCodeBlock().run();
+    (editor.chain().focus() as any).toggleCodeBlock().run();
 }
 
 export function insertImage(
-  editor: Editor,
-  attrs: { src: string; alt?: string; title?: string },
+    editor: Editor,
+    attrs: { src: string; alt?: string; title?: string },
 ): void {
-  (editor.chain().focus() as any).setImage(attrs).run();
+    (editor.chain().focus() as any).setImage(attrs).run();
 }
 
-export function setLink(
-  editor: Editor,
-  attrs: { href: string; target?: string },
-): void {
-  (editor.chain().focus() as any).setLink(attrs).run();
+export function setLink(editor: Editor, attrs: { href: string; target?: string }): void {
+    (editor.chain().focus() as any).setLink(attrs).run();
 }
 
 export function undo(editor: Editor): void {
-  (editor.chain().focus() as any).undo().run();
+    (editor.chain().focus() as any).undo().run();
 }
 
 export function redo(editor: Editor): void {
-  (editor.chain().focus() as any).redo().run();
+    (editor.chain().focus() as any).redo().run();
 }

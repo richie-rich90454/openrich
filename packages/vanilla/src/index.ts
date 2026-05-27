@@ -1,2 +1,2 @@
-export { mount, unmount } from './mount';
-export type { MountOptions } from './mount';
+export { mount, unmount } from "./mount";
+export type { MountOptions } from "./mount";

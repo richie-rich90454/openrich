@@ -1,23 +1,20 @@
-import type { Node as ProseMirrorNode } from 'prosemirror-model';
-import {
-  defaultMarkdownSerializer,
-  type MarkdownSerializer,
-} from 'prosemirror-markdown';
+import type { Node as ProseMirrorNode } from "prosemirror-model";
+import { defaultMarkdownSerializer, type MarkdownSerializer } from "prosemirror-markdown";
 
 function resolveProseMirrorNode(doc: any): ProseMirrorNode {
-  if ((doc as ProseMirrorNode)?.isBlock !== undefined) {
-    return doc as ProseMirrorNode;
-  }
-  if ((doc as any)?.state?.doc) {
-    return (doc as any).state.doc as ProseMirrorNode;
-  }
-  if ((doc as any)?.doc) {
-    return (doc as any).doc as ProseMirrorNode;
-  }
-  throw new Error(
-    'serializeMarkdown: unable to extract a ProseMirror Node from the provided argument. ' +
-      'Pass a ProseMirror Node or a TipTap Editor instance.',
-  );
+    if ((doc as ProseMirrorNode)?.isBlock !== undefined) {
+        return doc as ProseMirrorNode;
+    }
+    if ((doc as any)?.state?.doc) {
+        return (doc as any).state.doc as ProseMirrorNode;
+    }
+    if ((doc as any)?.doc) {
+        return (doc as any).doc as ProseMirrorNode;
+    }
+    throw new Error(
+        "serializeMarkdown: unable to extract a ProseMirror Node from the provided argument. " +
+            "Pass a ProseMirror Node or a TipTap Editor instance.",
+    );
 }
 
 /**
@@ -34,7 +31,7 @@ function resolveProseMirrorNode(doc: any): ProseMirrorNode {
  *                      serializer is sufficient.
  */
 export function serializeMarkdown(doc: any, _extensions?: any[]): string {
-  const node = resolveProseMirrorNode(doc);
-  const serializer: MarkdownSerializer = defaultMarkdownSerializer;
-  return serializer.serialize(node);
+    const node = resolveProseMirrorNode(doc);
+    const serializer: MarkdownSerializer = defaultMarkdownSerializer;
+    return serializer.serialize(node);
 }

@@ -1,1 +1,1 @@
-export { renderStatic, isClient } from '@openrich/core';
+export { renderStatic, isClient } from "@openrich/core";

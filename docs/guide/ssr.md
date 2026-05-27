@@ -5,14 +5,17 @@ OpenRich is SSR-safe. All framework bindings delay editor initialization to the 
 ## `renderStatic()`
 
 ```typescript
-import { renderStatic } from '@openrich/ssr-utils';
+import { renderStatic } from "@openrich/ssr-utils";
 
 // From HTML
-const html = renderStatic('<p>Hello, world!</p>');
+const html = renderStatic("<p>Hello, world!</p>");
 // → <div data-openrich-editor><p>Hello, world!</p></div>
 
 // From ProseMirror JSON
-const json = { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Hello' }] }] };
+const json = {
+    type: "doc",
+    content: [{ type: "paragraph", content: [{ type: "text", text: "Hello" }] }],
+};
 const html = renderStatic(json);
 // → <div data-openrich-editor><p>Hello</p></div>
 ```
@@ -20,9 +23,9 @@ const html = renderStatic(json);
 ## `isClient`
 
 ```typescript
-import { isClient } from '@openrich/ssr-utils';
+import { isClient } from "@openrich/ssr-utils";
 
 if (isClient) {
-  // Browser-only code
+    // Browser-only code
 }
 ```

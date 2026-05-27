@@ -1,3 +1,3 @@
-import Placeholder from '@tiptap/extension-placeholder';
+import Placeholder from "@tiptap/extension-placeholder";
 export { Placeholder };
 export default Placeholder;

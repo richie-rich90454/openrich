@@ -8,16 +8,16 @@
 
 **openrich** is a framework-agnostic rich-text editor built on TipTap (ProseMirror). It ships as a monorepo (npm workspaces + Turborepo) with one core package and framework bindings for React, Vue, Svelte, Solid, and vanilla JS. Extensions are tree-shakable via a separate package; a `@openrich/starter-kit` bundles the common ones.
 
-| Attribute | Value |
-|-----------|-------|
-| **Editor engine** | TipTap (v2, `@tiptap/core`) |
-| **Build tool** | Vite + Rolldown (vite@latest) |
-| **Monorepo** | npm workspaces + Turborepo |
-| **Output** | CJS (`.cjs`) + ESM (`.mjs`) per package |
-| **Target** | Chrome 49+ (ES2015) |
-| **Design** | Cold / neutral — no glassmorphism, no gradients, no blur |
-| **Fonts** | System fonts only |
-| **Locales** | en, zh, es, ar, pt, fr, ru, de, ja, ko, hi (11) |
+| Attribute         | Value                                                    |
+| ----------------- | -------------------------------------------------------- |
+| **Editor engine** | TipTap (v2, `@tiptap/core`)                              |
+| **Build tool**    | Vite + Rolldown (vite@latest)                            |
+| **Monorepo**      | npm workspaces + Turborepo                               |
+| **Output**        | CJS (`.cjs`) + ESM (`.mjs`) per package                  |
+| **Target**        | Chrome 49+ (ES2015)                                      |
+| **Design**        | Cold / neutral — no glassmorphism, no gradients, no blur |
+| **Fonts**         | System fonts only                                        |
+| **Locales**       | en, zh, es, ar, pt, fr, ru, de, ja, ko, hi (11)          |
 
 ---
 
@@ -39,7 +39,7 @@
 ## 3. Tech Stack
 
 | Layer | Choice | Rationale |
-|-------|--------|-----------|
+| --- | --- | --- |
 | Editor engine | TipTap v2 (`@tiptap/core`) | Higher-level API over ProseMirror; extension system aligns with openrich's architecture |
 | Build | Vite library mode (Rolldown) | `vite@latest` with Rolldown for fast lib bundling; CJS + ESM dual output |
 | Monorepo | npm workspaces + Turborepo | Simple setup, no extra tooling; Turborepo for caching |
@@ -262,6 +262,7 @@ openrich/
 ```
 
 **Build order by package:**
+
 1. `@openrich/core` (P0 — no deps)
 2. `@openrich/extensions` (P1 — depends on core types)
 3. `@openrich/starter-kit` (P1 — depends on extensions)
@@ -282,6 +283,7 @@ openrich/
 **Goal:** Working monorepo with Turborepo, TypeScript, and Biome.
 
 **Files to create:**
+
 - `package.json` (root) — workspaces: `["packages/*", "playground"]`, devDeps: turbo, typescript, vite, biome
 - `tsconfig.json` (root) — strict, paths: `@openrich/*`
 - `tsconfig.build.json` — stricter, declaration, declarationMap
@@ -290,8 +292,8 @@ openrich/
 - `.npmrc` — `legacy-peer-deps=true`
 - `.gitignore` (update existing) — add `dist/`, `.turbo`
 
-**Agent:** `backend-specialist` (monorepo infrastructure)
-**Verification:**
+**Agent:** `backend-specialist` (monorepo infrastructure) **Verification:**
+
 - `npm install` completes without errors
 - `npx turbo --version` prints version
 - `npx tsc --noEmit` passes on empty project
@@ -304,6 +306,7 @@ openrich/
 **Goal:** Headless editor class, serialization, base classes, i18n, theme, SSR utils.
 
 **Files to create:**
+
 - `packages/core/package.json` — deps: `@tiptap/core`, `@tiptap/pm`, `prosemirror-model`, `prosemirror-view`, `prosemirror-state`, `prosemirror-transform`, `prosemirror-commands`, `prosemirror-keymap`, `prosemirror-schema-list`, `prosemirror-inputrules`
 - `packages/core/tsconfig.json`
 - `packages/core/vite.config.ts` — lib mode, `build.lib.name='OpenRichCore'`, `build.rollupOptions.external: /@tiptap/`, CJS+ESM
@@ -329,8 +332,8 @@ openrich/
 - `packages/core/src/utils/dom.ts`
 - `packages/core/src/utils/platform.ts`
 
-**Agent:** `frontend-specialist` (editor internals, i18n, theme) + `backend-specialist` (serialization, SSR)
-**Verification:**
+**Agent:** `frontend-specialist` (editor internals, i18n, theme) + `backend-specialist` (serialization, SSR) **Verification:**
+
 - `cd packages/core && npx vite build` produces `dist/index.mjs` + `dist/index.cjs`
 - `node -e "require('./dist/index.cjs')"` does not throw
 - Static analysis: `npx tsc --noEmit` passes in `packages/core`
@@ -347,6 +350,7 @@ openrich/
 #### 2a. `@openrich/extensions`
 
 **Files to create:**
+
 - `packages/extensions/package.json` — deps: `@openrich/core` (peer), `@tiptap/extension-*` equivalents
 - `packages/extensions/tsconfig.json`
 - `packages/extensions/vite.config.ts` — lib mode, external: `@openrich/core`, `@tiptap/*`
@@ -373,8 +377,8 @@ openrich/
 
 Each extension wraps the corresponding TipTap extension or implements it via base classes. For example, `bold.ts` imports `@tiptap/extension-bold` and re-exports it as an openrich-compatible wrapper.
 
-**Agent:** `frontend-specialist`
-**Verification:**
+**Agent:** `frontend-specialist` **Verification:**
+
 - Build produces valid CJS + ESM
 - `import { Bold } from '@openrich/extensions'` resolves and `Bold.name === 'bold'`
 - Tree-shaking confirmed: bundling only `Bold` excludes `Italic` from output
@@ -382,26 +386,28 @@ Each extension wraps the corresponding TipTap extension or implements it via bas
 #### 2b. `@openrich/starter-kit`
 
 **Files to create:**
+
 - `packages/extensions-starter-kit/package.json` — deps: `@openrich/extensions`, `@openrich/core`
 - `packages/extensions-starter-kit/tsconfig.json`
 - `packages/extensions-starter-kit/vite.config.ts`
 - `packages/extensions-starter-kit/src/index.ts` — imports all nodes/marks/plugins, exports as `StarterKit` array
 
-**Agent:** `frontend-specialist`
-**Verification:**
+**Agent:** `frontend-specialist` **Verification:**
+
 - `import { StarterKit } from '@openrich/starter-kit'` returns an array of 20+ extensions
 - Build succeeds
 
 #### 2c. `@openrich/ssr-utils`
 
 **Files to create:**
+
 - `packages/ssr-utils/package.json` — deps: `@openrich/core`
 - `packages/ssr-utils/tsconfig.json`
 - `packages/ssr-utils/vite.config.ts`
 - `packages/ssr-utils/src/index.ts` — `export { renderStatic, isClient } from '@openrich/core'`
 
-**Agent:** `backend-specialist`
-**Verification:**
+**Agent:** `backend-specialist` **Verification:**
+
 - `import { renderStatic, isClient } from '@openrich/ssr-utils'` works
 - `isClient` is `false` in Node, `true` in browser
 
@@ -414,6 +420,7 @@ Each extension wraps the corresponding TipTap extension or implements it via bas
 #### 3a. `@openrich/react`
 
 **Files to create:**
+
 - `packages/react/package.json` — deps: `@openrich/core` (peer), `@openrich/extensions` (peer), react (peer), react-dom (peer)
 - `packages/react/tsconfig.json` — `jsx: "react-jsx"`
 - `packages/react/vite.config.ts` — lib mode, external: react, react-dom, `@openrich/*`
@@ -424,22 +431,23 @@ Each extension wraps the corresponding TipTap extension or implements it via bas
 - `packages/react/src/types.ts`
 
 **Props surface:**
+
 ```ts
 interface EditorProps {
-  content?: string | Record<string, unknown>;
-  extensions?: Extension[];
-  editable?: boolean;
-  onUpdate?: (props: { editor: OpenRichEditor; content: string }) => void;
-  onFocus?: (props: { editor: OpenRichEditor }) => void;
-  onBlur?: (props: { editor: OpenRichEditor }) => void;
-  locale?: string | { dir: 'ltr' | 'rtl'; messages: Record<string, string> };
-  theme?: 'light' | 'dark' | 'system';
-  placeholder?: string;
+    content?: string | Record<string, unknown>;
+    extensions?: Extension[];
+    editable?: boolean;
+    onUpdate?: (props: { editor: OpenRichEditor; content: string }) => void;
+    onFocus?: (props: { editor: OpenRichEditor }) => void;
+    onBlur?: (props: { editor: OpenRichEditor }) => void;
+    locale?: string | { dir: "ltr" | "rtl"; messages: Record<string, string> };
+    theme?: "light" | "dark" | "system";
+    placeholder?: string;
 }
 ```
 
-**Agent:** `frontend-specialist`
-**Verification:**
+**Agent:** `frontend-specialist` **Verification:**
+
 - `<Editor content="<p>Hello</p>" />` renders a TipTap editor in the DOM
 - `onUpdate` fires on content change
 - `editable={false}` disables editing
@@ -448,6 +456,7 @@ interface EditorProps {
 #### 3b. `@openrich/vue`
 
 **Files to create:**
+
 - `packages/vue/package.json` — deps: `@openrich/core` (peer), `@openrich/extensions` (peer), vue (peer)
 - `packages/vue/tsconfig.json`
 - `packages/vue/vite.config.ts` — lib mode, external: vue, `@openrich/*`
@@ -456,14 +465,15 @@ interface EditorProps {
 - `packages/vue/src/use-editor.ts` — composable
 - `packages/vue/src/types.ts`
 
-**Agent:** `frontend-specialist`
-**Verification:**
+**Agent:** `frontend-specialist` **Verification:**
+
 - `<Editor :content="'<p>Hello</p>'" />` renders in a Vue test app
 - Props reactive: changing `extensions` rebuilds the editor
 
 #### 3c. `@openrich/svelte`
 
 **Files to create:**
+
 - `packages/svelte/package.json` — deps: `@openrich/core`, `@openrich/extensions`, svelte (peer)
 - `packages/svelte/tsconfig.json`
 - `packages/svelte/svelte.config.js`
@@ -472,13 +482,14 @@ interface EditorProps {
 - `packages/svelte/src/Editor.svelte` — Svelte 5 runes component
 - `packages/svelte/src/types.ts`
 
-**Agent:** `frontend-specialist` (with Svelte expertise)
-**Verification:**
+**Agent:** `frontend-specialist` (with Svelte expertise) **Verification:**
+
 - Mount `Editor` in a Svelte app, editor renders and is interactive
 
 #### 3d. `@openrich/solid`
 
 **Files to create:**
+
 - `packages/solid/package.json` — deps: `@openrich/core`, `@openrich/extensions`, solid-js (peer)
 - `packages/solid/tsconfig.json`
 - `packages/solid/vite.config.ts`
@@ -487,21 +498,22 @@ interface EditorProps {
 - `packages/solid/src/create-editor.ts` — Solid reactive primitive
 - `packages/solid/src/types.ts`
 
-**Agent:** `frontend-specialist` (with Solid expertise)
-**Verification:**
+**Agent:** `frontend-specialist` (with Solid expertise) **Verification:**
+
 - Mount `Editor` in a Solid app, editor renders and is interactive
 
 #### 3e. `@openrich/vanilla`
 
 **Files to create:**
+
 - `packages/vanilla/package.json` — deps: `@openrich/core`, `@openrich/extensions`
 - `packages/vanilla/tsconfig.json`
 - `packages/vanilla/vite.config.ts`
 - `packages/vanilla/src/index.ts`
 - `packages/vanilla/src/mount.ts` — `mount(element, options)` creates editor, appends to DOM; `unmount(editor)` destroys
 
-**Agent:** `frontend-specialist`
-**Verification:**
+**Agent:** `frontend-specialist` **Verification:**
+
 - In a plain HTML page, `mount(document.getElementById('editor'), { content: '<p>Hello</p>' })` works
 - `unmount` removes the editor and cleans up DOM
 
@@ -512,6 +524,7 @@ interface EditorProps {
 **Goal:** A working React demo app that exercises all features.
 
 **Files to create:**
+
 - `playground/package.json` — deps: `@openrich/core`, `@openrich/react`, `@openrich/extensions`, `@openrich/starter-kit`, react, react-dom, vite (dev)
 - `playground/tsconfig.json`
 - `playground/vite.config.ts` — dev server, alias `@openrich/*` to packages
@@ -523,8 +536,8 @@ interface EditorProps {
 - `playground/src/editable-toggle.tsx` — toggle switch
 - `playground/src/styles.css` — layout, control bar styling (cold design)
 
-**Agent:** `frontend-specialist`
-**Verification:**
+**Agent:** `frontend-specialist` **Verification:**
+
 - `npm run dev` in playground starts Vite dev server
 - Theme toggle switches between light/dark/system (check `prefers-color-scheme` mock)
 - Locale selector changes language of built-in strings
@@ -538,28 +551,37 @@ interface EditorProps {
 **Goal:** Finalize theme variables, cold-design aesthetic, system font stack.
 
 **Files to modify:**
+
 - `packages/core/src/theme/variables.css` — finalize color values
 
 **Design tokens (cold / neutral):**
 
-| Variable | Light | Dark |
-|----------|-------|------|
-| `--openrich-bg` | `#ffffff` | `#1a1a1a` |
+| Variable             | Light     | Dark      |
+| -------------------- | --------- | --------- |
+| `--openrich-bg`      | `#ffffff` | `#1a1a1a` |
 | `--openrich-surface` | `#f5f5f5` | `#2a2a2a` |
 | `--openrich-primary` | `#4f5b66` | `#a0aec0` |
-| `--openrich-border` | `#d1d5db` | `#3a3a3a` |
-| `--openrich-text` | `#1f2937` | `#e5e5e5` |
-| `--openrich-radius` | `0px` | `0px` |
+| `--openrich-border`  | `#d1d5db` | `#3a3a3a` |
+| `--openrich-text`    | `#1f2937` | `#e5e5e5` |
+| `--openrich-radius`  | `0px`     | `0px`     |
 
 **System font stack:**
+
 ```css
-font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 ```
 
 **No font packages loaded.** No glassmorphism (`backdrop-filter`, `rgba(255,255,255,0.1)` patterns). No gradients.
 
-**Agent:** `frontend-specialist` (design)
-**Verification:**
+**Agent:** `frontend-specialist` (design) **Verification:**
+
 - Visual inspection confirms cold, neutral palette
 - No `backdrop-filter`, `linear-gradient`, `radial-gradient`, or `blur()` in any CSS file
 - Font stack does not load any external font files
@@ -571,6 +593,7 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 **Goal:** Run all verifications, fix issues, mark complete.
 
 **Tasks:**
+
 1. `npm run lint` — Biome check on all packages
 2. `npx tsc --noEmit` — type-check entire monorepo
 3. `npx turbo run build` — build all packages in dependency order
@@ -582,8 +605,8 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 9. Verify RTL: set `locale="ar"`, confirm `dir="rtl"` on editor wrapper
 10. Verify all 11 locale files load without errors
 
-**Agent:** `test-engineer` + `performance-optimizer`
-**Verification:**
+**Agent:** `test-engineer` + `performance-optimizer` **Verification:**
+
 - All checks pass (listed above)
 - Phase X marker added to this plan file
 
@@ -591,37 +614,40 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 
 ## 7. Agent Assignments Summary
 
-| Phase | Scope | Primary Agent | Support Agent |
-|-------|-------|---------------|---------------|
-| 0 | Monorepo scaffold | `backend-specialist` | — |
-| 1 | `@openrich/core` | `frontend-specialist` | `backend-specialist` |
-| 2a | Extensions | `frontend-specialist` | — |
-| 2b | Starter kit | `frontend-specialist` | — |
-| 2c | SSR utils | `backend-specialist` | — |
-| 3a | React binding | `frontend-specialist` | — |
-| 3b | Vue binding | `frontend-specialist` | — |
-| 3c | Svelte binding | `frontend-specialist` | — |
-| 3d | Solid binding | `frontend-specialist` | — |
-| 3e | Vanilla binding | `frontend-specialist` | — |
-| 4 | Playground | `frontend-specialist` | — |
-| 5 | CSS & theme polish | `frontend-specialist` | — |
-| 6 | Verification | `test-engineer` | `performance-optimizer` |
+| Phase | Scope              | Primary Agent         | Support Agent           |
+| ----- | ------------------ | --------------------- | ----------------------- |
+| 0     | Monorepo scaffold  | `backend-specialist`  | —                       |
+| 1     | `@openrich/core`   | `frontend-specialist` | `backend-specialist`    |
+| 2a    | Extensions         | `frontend-specialist` | —                       |
+| 2b    | Starter kit        | `frontend-specialist` | —                       |
+| 2c    | SSR utils          | `backend-specialist`  | —                       |
+| 3a    | React binding      | `frontend-specialist` | —                       |
+| 3b    | Vue binding        | `frontend-specialist` | —                       |
+| 3c    | Svelte binding     | `frontend-specialist` | —                       |
+| 3d    | Solid binding      | `frontend-specialist` | —                       |
+| 3e    | Vanilla binding    | `frontend-specialist` | —                       |
+| 4     | Playground         | `frontend-specialist` | —                       |
+| 5     | CSS & theme polish | `frontend-specialist` | —                       |
+| 6     | Verification       | `test-engineer`       | `performance-optimizer` |
 
 ---
 
 ## 8. Verification Checklist (Phase X)
 
 ### P0 — Lint & Type Check
+
 - [ ] `npx biome check packages/*/src` passes
 - [ ] `npx tsc --noEmit` passes (no `any` escapes where strict expects types)
 - [ ] `npx turbo run build` succeeds
 
 ### P1 — Build Outputs
+
 - [ ] Each package has `dist/index.mjs` and `dist/index.cjs`
 - [ ] `node -e "require('./packages/core/dist/index.cjs')"` does not throw
 - [ ] `node -e "require('./packages/extensions/dist/index.cjs')"` does not throw
 
 ### P2 — Core Features
+
 - [ ] `new OpenRichEditor({ content: '<p>test</p>' })` creates editable editor
 - [ ] `editor.getHTML()` returns `<p>test</p>`
 - [ ] `editor.getJSON()` returns valid ProseMirror JSON
@@ -632,6 +658,7 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 - [ ] Locale switching updates editor UI strings
 
 ### P3 — Framework Bindings
+
 - [ ] React `<Editor>` mounts and unmounts without memory leaks
 - [ ] Vue `<Editor>` mounts and unmounts without memory leaks
 - [ ] Svelte `<Editor>` mounts and unmounts without memory leaks
@@ -639,11 +666,13 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 - [ ] Vanilla `mount()`/`unmount()` works in plain HTML page
 
 ### P4 — Extensions
+
 - [ ] `import { Bold } from '@openrich/extensions'` works
 - [ ] `import { StarterKit } from '@openrich/starter-kit'` returns array of 20+ extensions
 - [ ] Tree-shaking confirmed: unused extensions are not in final bundle
 
 ### P5 — Design Compliance
+
 - [ ] No purple/violet hex codes in any CSS
 - [ ] No `backdrop-filter`, `blur()`, `linear-gradient`, `radial-gradient`
 - [ ] System font stack — no `@font-face` or font imports
@@ -651,6 +680,7 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 - [ ] Default radius is `0px`
 
 ### P6 — Playground
+
 - [ ] `npm run dev` in playground starts without errors
 - [ ] Theme toggle cycles light/dark/system
 - [ ] Locale selector switches between 11 locales
@@ -658,12 +688,14 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 - [ ] Content typed in editor persists on page (no data loss)
 
 ### P7 — RTL / i18n
+
 - [ ] `locale="ar"` sets `dir="rtl"` on editor wrapper
 - [ ] `locale="en"` sets `dir="ltr"`
 - [ ] ProseMirror bidi cursor handling is active (default)
 - [ ] All 11 locale message files load without errors
 
 ### P8 — Security & Supply Chain
+
 - [ ] No hardcoded secrets or tokens
 - [ ] All deps use `@latest` per requirement
 - [ ] `.npmrc` sets `legacy-peer-deps=true` (handles TipTap peer deps)
@@ -673,7 +705,7 @@ font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, san
 ## 9. Rollback Strategy
 
 | Failure | Recovery |
-|---------|----------|
+| --- | --- |
 | Build fails in Phase 1 | Check TipTap peer deps compatibility; verify `@tiptap/core` import works in isolation |
 | Framework binding doesn't render | Verify the framework version (React 18/19, Vue 3, Svelte 5, Solid 1.8+); check JSX config |
 | Locale messages missing keys | Add missing keys to all 11 files before marking Phase 1 complete |

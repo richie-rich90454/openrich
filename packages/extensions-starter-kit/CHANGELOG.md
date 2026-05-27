@@ -6,5 +6,5 @@
 
 - Initial prerelease publish
 - Updated dependencies
-  - @openrich/core@0.1.1-next.0
-  - @openrich/extensions@0.1.1-next.0
+    - @openrich/core@0.1.1-next.0
+    - @openrich/extensions@0.1.1-next.0

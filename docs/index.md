@@ -3,15 +3,11 @@
 A universal rich-text editor for any UI framework.
 
 ```tsx
-import { OpenRichEditor } from '@openrich/react';
-import { StarterKit } from '@openrich/starter-kit';
+import { OpenRichEditor } from "@openrich/react";
+import { StarterKit } from "@openrich/starter-kit";
 
 export default () => (
-  <OpenRichEditor
-    content="<p>Hello, world!</p>"
-    extensions={[StarterKit]}
-    theme="system"
-  />
+    <OpenRichEditor content="<p>Hello, world!</p>" extensions={[StarterKit]} theme="system" />
 );
 ```
 

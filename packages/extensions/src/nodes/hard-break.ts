@@ -1,3 +1,3 @@
-import HardBreak from '@tiptap/extension-hard-break';
+import HardBreak from "@tiptap/extension-hard-break";
 export { HardBreak };
 export default HardBreak;
