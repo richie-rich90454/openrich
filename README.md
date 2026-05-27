@@ -93,7 +93,7 @@ npm run release
 
 ```bash
 # Enter prerelease mode
-npm run prerelease next
+npm run enter-prerelease next
 
 # Create a changeset
 npm run changeset
