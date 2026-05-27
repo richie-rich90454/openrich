@@ -16,7 +16,9 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build && changeset publish",
-    "enter-prerelease": "changeset pre enter"
+    "enter-prerelease": "changeset pre enter",
+    "publish:stable": "npm run changeset && npm run version-packages && npm run release",
+    "publish:prerelease": "npm run enter-prerelease -- next && npm run changeset && npm run version-packages && npm run release"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
