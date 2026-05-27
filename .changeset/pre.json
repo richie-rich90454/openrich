@@ -1,0 +1,19 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@openrich/core": "0.1.0",
+    "@openrich/extensions": "0.1.0",
+    "@openrich/starter-kit": "0.1.0",
+    "@openrich/react": "0.1.0",
+    "@openrich/solid": "0.1.0",
+    "@openrich/ssr-utils": "0.1.0",
+    "@openrich/svelte": "0.1.0",
+    "@openrich/vanilla": "0.1.0",
+    "@openrich/vue": "0.1.0",
+    "openrich-playground": "0.0.0"
+  },
+  "changesets": [
+    "shiny-otters-invent"
+  ]
+}

@@ -76,44 +76,48 @@ npm run lint
 
 All `@openrich/*` packages are versioned together using Changesets.
 
-### Prerequisites
+### Token setup (two options)
 
-1. Create the `@openrich` org on [npmjs.com](https://www.npmjs.com) if it doesn't exist
-2. Run `npm login` once — caches your session for all 9 packages
-3. If you have 2FA enabled, set `CHANGESETS_PUBLISH_OTP` — changesets passes it to every `npm publish` call, so you enter it once
+The token is **scope-restricted by npm** — it only has permissions for `@openrich/*` packages. Publishing non-@openrich packages with it will get rejected, not accidentally published. Choose either:
 
-### One-command workflows
+**Option A: Global (simple)** — writes to `~/.npmrc`, available to all projects but harmless outside this one:
 
 ```powershell
-# PowerShell (Windows)
-npm login
+npm config set //registry.npmjs.org/:_authToken=npm_xxx --location=user
+```
+
+**Option B: Project-local (isolated)** — uses an env var that only this project sees:
+
+```powershell
+$env:NPM_TOKEN="npm_xxx"; npm run publish:prerelease
+```
+
+The `release` script can be updated to read `$env:NPM_TOKEN` if desired, but the default setup uses the global approach for simplicity.
+
+### Prerequisites
+
+1. Create the `@openrich` org on [npmjs.com](https://www.npmjs.com) — without it, publishing fails with `404 Scope not found`
+2. Create an **automation token** at `npmjs.com → Access Tokens → Generate New Token → Automation`
+3. Set the token via one of the options above
+
+### One-command prerelease
+
+```powershell
 $env:CHANGESETS_PUBLISH_OTP="123456"; npm run publish:prerelease
 ```
 
-```bash
-# Bash (macOS/Linux)
-npm login
-CHANGESETS_PUBLISH_OTP=123456 npm run publish:prerelease
-```
+The interactive `changeset` step pauses for you to describe changes, then the chain continues automatically. You can also use the script directly:
 
-The interactive `changeset` step pauses for you to describe changes, then the chain continues automatically.
+```powershell
+.\scripts\release.ps1 -Mode prerelease -Otp 123456
+```
 
 ### Stable release (manual steps)
 
 ```powershell
 npm run changeset
 npm run version-packages
-$env:CHANGESETS_PUBLISH_OTP="123456"; npm run release
-```
-
-### Prerelease (e.g., `1.0.0-next.1`)
-
-```powershell
-npm run enter-prerelease next
-npm run changeset
-npm run version-packages
-$env:CHANGESETS_PUBLISH_OTP="123456"; npm run release
-npx changeset pre exit   # when ready for stable
+npm run release
 ```
 
 ## License
