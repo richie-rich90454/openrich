@@ -1,6 +1,6 @@
 {
     "name": "@openrich/extensions",
-    "version": "0.1.1-next.0",
+    "version": "1.0.0-next.1",
     "description": "Tree-shakable rich-text editor extensions — nodes, marks, and plugins",
     "type": "module",
     "main": "./dist/index.cjs",
@@ -52,7 +52,7 @@
         "@tiptap/extension-blockquote": "^2.11.0"
     },
     "peerDependencies": {
-        "@openrich/core": "0.1.1-next.0"
+        "@openrich/core": "1.0.0-next.1"
     },
     "license": "MIT",
     "publishConfig": {
