@@ -12,6 +12,8 @@
     locale = undefined,
     theme = 'system',
     placeholder = undefined,
+    class: className = '',
+    style = undefined,
   }: {
     content?: string | Record<string, unknown>;
     extensions?: any[];
@@ -22,6 +24,8 @@
     locale?: string | { dir: 'ltr' | 'rtl'; messages: Record<string, string> };
     theme?: 'light' | 'dark' | 'system';
     placeholder?: string;
+    class?: string;
+    style?: string;
   } = $props();
 
   let container: HTMLDivElement | undefined = $state();
@@ -62,7 +66,7 @@
 </script>
 
 {#if !isClient}
-  <div data-openrich-editor data-theme={theme}></div>
+  <div data-openrich-editor data-theme={theme} class={className} {style}></div>
 {:else}
-  <div bind:this={container}></div>
+  <div bind:this={container} class="openrich-editor {className}" {style}></div>
 {/if}

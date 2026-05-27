@@ -41,8 +41,9 @@ export function Editor(props: EditorProps) {
   });
 
   if (!isClient) {
-    return <div data-openrich-editor data-theme={props.theme ?? 'system'} />;
+    return <div data-openrich-editor data-theme={props.theme ?? 'system'} className={props.className} style={props.style} />;
   }
 
-  return <div ref={(el) => { containerRef = el }} />;
+  const cls = props.className ? `openrich-editor ${props.className}` : 'openrich-editor';
+  return <div ref={(el) => { containerRef = el }} className={cls} style={props.style} />;
 }

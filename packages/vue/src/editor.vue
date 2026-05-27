@@ -13,6 +13,8 @@ const props = withDefaults(defineProps<{
   locale?: string | { dir: 'ltr' | 'rtl'; messages: Record<string, string> };
   theme?: 'light' | 'dark' | 'system';
   placeholder?: string;
+  className?: string;
+  style?: Record<string, string>;
 }>(), {
   editable: true,
   theme: 'system',
@@ -53,6 +55,13 @@ watch(() => props.locale, (val) => { if (val) editorRef.value?.setLocale(val); }
     v-if="!isClient"
     data-openrich-editor
     :data-theme="theme"
+    :class="className"
+    :style="style"
   />
-  <div v-else ref="container" />
+  <div
+    v-else
+    ref="container"
+    :class="['openrich-editor', className].filter(Boolean).join(' ')"
+    :style="style"
+  />
 </template>

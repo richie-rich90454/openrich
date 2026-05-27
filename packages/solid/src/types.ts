@@ -10,4 +10,6 @@ export interface EditorProps {
   locale?: string | { dir: 'ltr' | 'rtl'; messages: Record<string, string> };
   theme?: ThemeMode;
   placeholder?: string;
+  className?: string;
+  style?: Record<string, string>;
 }

@@ -9,6 +9,7 @@ export interface MountOptions extends Partial<OpenRichOptions> {
   locale?: string | { dir: 'ltr' | 'rtl'; messages: Record<string, string> };
   theme?: 'light' | 'dark' | 'system';
   placeholder?: string;
+  className?: string;
 }
 
 export function mount(
@@ -18,7 +19,10 @@ export function mount(
   if (!isClient) return null;
 
   const editor = new OpenRichEditor(options);
-  element.appendChild(editor.tiptapEditor.view.dom);
+  const wrapper = document.createElement('div');
+  wrapper.className = `openrich-editor${options.className ? ` ${options.className}` : ''}`;
+  wrapper.appendChild(editor.tiptapEditor.view.dom);
+  element.appendChild(wrapper);
 
   return editor;
 }

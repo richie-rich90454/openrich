@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { OpenRichOptions, ThemeMode } from '@openrich/core';
 
 export interface EditorProps {
@@ -10,4 +11,6 @@ export interface EditorProps {
   locale?: string | { dir: 'ltr' | 'rtl'; messages: Record<string, string> };
   theme?: ThemeMode;
   placeholder?: string;
+  className?: string;
+  style?: CSSProperties;
 }

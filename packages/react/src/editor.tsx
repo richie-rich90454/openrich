@@ -13,6 +13,8 @@ export function Editor({
   locale,
   theme = 'system',
   placeholder,
+  className,
+  style,
 }: EditorProps) {
   const editorRef = useRef<OpenRichEditor | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -58,8 +60,8 @@ export function Editor({
   }, [locale]);
 
   if (!isClient) {
-    return <div data-openrich-editor data-theme={theme} />;
+    return <div data-openrich-editor data-theme={theme} className={className} style={style} />;
   }
 
-  return <div ref={containerRef} />;
+  return <div ref={containerRef} className={`openrich-editor${className ? ` ${className}` : ''}`} style={style} />;
 }
