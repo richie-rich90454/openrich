@@ -60,7 +60,7 @@ describe('Node base class', () => {
     class BlockquoteNode extends Node {
       name = 'blockquote';
       schema = { content: 'block+', group: 'block' };
-      parseDOM = [{ tag: 'blockquote' }];
+      override parseDOM = [{ tag: 'blockquote' }];
     }
 
     const instance = new BlockquoteNode();
@@ -76,7 +76,7 @@ describe('Node base class', () => {
         group: 'block',
         attrs: { level: { default: 1 } },
       };
-      toDOM = () => ['h1', {}, 0] as [string, Record<string, string>, number];
+      override toDOM = (_node: any) => ['h1', {}, 0] as [string, Record<string, string>, number];
     }
 
     const instance = new HeadingNode();

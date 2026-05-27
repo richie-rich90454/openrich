@@ -50,7 +50,7 @@ describe('Mark base class', () => {
     class CodeMark extends Mark {
       name = 'code';
       schema = {};
-      parseDOM = [{ tag: 'code' }];
+      override parseDOM = [{ tag: 'code' }];
     }
 
     const instance = new CodeMark();
@@ -72,7 +72,7 @@ describe('Mark base class', () => {
     class StrongMark extends Mark {
       name = 'strong';
       schema = {};
-      toDOM = () => ['strong', {}] as [string, Record<string, string>];
+      override toDOM = (_mark: any) => ['strong', {}] as [string, Record<string, string>];
     }
 
     const instance = new StrongMark();

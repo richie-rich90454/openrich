@@ -5,7 +5,7 @@ import '@openrich/core/src/theme/variables.css';
 
 export function OpenRichEditor(props: EditorProps) {
   let containerRef: HTMLDivElement | null = null;
-  let editor: OpenRichEditor | null = null;
+  let editor: CoreEditor | null = null;
 
   onMount(() => {
     if (!isClient || !containerRef) return;

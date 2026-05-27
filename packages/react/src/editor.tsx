@@ -16,7 +16,7 @@ export function OpenRichEditor({
   className,
   style,
 }: EditorProps) {
-  const editorRef = useRef<OpenRichEditor | null>(null);
+  const editorRef = useRef<CoreEditor | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Initialize editor on mount
