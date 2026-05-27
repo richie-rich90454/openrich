@@ -79,13 +79,19 @@ All `@openrich/*` packages are versioned together using Changesets.
 ### Prerequisites
 
 1. Create the `@openrich` org on [npmjs.com](https://www.npmjs.com) if it doesn't exist
-2. Run `npm login` once — this caches your session so you won't be prompted 9 times
-3. If you have 2FA enabled, set `CHANGESETS_PUBLISH_OTP=<code>` — changesets passes it to all 9 packages automatically
+2. Run `npm login` once — caches your session for all 9 packages
+3. If you have 2FA enabled, set `CHANGESETS_PUBLISH_OTP` — changesets passes it to every `npm publish` call, so you enter it once
 
 ### One-command workflows
 
+```powershell
+# PowerShell (Windows)
+npm login
+$env:CHANGESETS_PUBLISH_OTP="123456"; npm run publish:prerelease
+```
+
 ```bash
-# Auth once, then publish
+# Bash (macOS/Linux)
 npm login
 CHANGESETS_PUBLISH_OTP=123456 npm run publish:prerelease
 ```
@@ -94,25 +100,21 @@ The interactive `changeset` step pauses for you to describe changes, then the ch
 
 ### Stable release (manual steps)
 
-```bash
-npm run changeset           # interactive — describe changes
-npm run version-packages    # bump all 9 packages in sync
-CHANGESETS_PUBLISH_OTP=123456 npm run release  # build + publish
+```powershell
+npm run changeset
+npm run version-packages
+$env:CHANGESETS_PUBLISH_OTP="123456"; npm run release
 ```
 
 ### Prerelease (e.g., `1.0.0-next.1`)
 
-```bash
+```powershell
 npm run enter-prerelease next
 npm run changeset
 npm run version-packages
-CHANGESETS_PUBLISH_OTP=123456 npm run release
-
-# When ready for stable:
-npx changeset pre exit
+$env:CHANGESETS_PUBLISH_OTP="123456"; npm run release
+npx changeset pre exit   # when ready for stable
 ```
-
-**`CHANGESETS_PUBLISH_OTP`** is the key — changesets reads this env var and passes `--otp=<code>` to every `npm publish` call, so you authenticate once instead of 9 times.
 
 ## License
 
