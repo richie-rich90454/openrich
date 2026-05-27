@@ -25,4 +25,9 @@ export default defineConfig({
             },
         ],
     },
+    vite: {
+        build: {
+            target: "es6",
+        },
+    },
 });
