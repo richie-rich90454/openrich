@@ -29,7 +29,8 @@
         "format:js": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
         "format:html": "prettier --write \"**/*.html\"",
         "format:css": "prettier --write \"**/*.css\"",
-        "format:json": "prettier --write \"**/*.json\""
+        "format:json": "prettier --write \"**/*.json\"",
+        "sync-deps": "syncpack fix"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.9.0",
@@ -49,14 +50,18 @@
         "react-dom": "^19.2.6",
         "solid-js": "^1.9.13",
         "svelte": "^5.55.9",
+        "syncpack": "^15.3.1",
         "turbo": "^2.3.0",
         "typescript": "^5.7.0",
-        "vite": "^6.3.0",
         "vitepress": "^1.6.4",
         "vitest": "^4.1.7",
         "vue": "^3.5.35"
     },
     "packageManager": "npm@10.8.0",
+    "overrides": {
+        "esbuild": ">=0.24.3",
+        "vite": "^8.0.12"
+    },
     "engines": {
         "node": ">=18.0.0"
     }
