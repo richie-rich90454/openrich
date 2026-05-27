@@ -1,6 +1,6 @@
 {
   "name": "openrich",
-  "private": true,
+  "private": false,
   "workspaces": [
     "packages/*",
     "playground"
