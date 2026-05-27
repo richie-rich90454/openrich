@@ -6,7 +6,7 @@ vi.mock('./Editor.svelte', () => ({ default: {} }));
 import * as exports from './index';
 
 describe('@openrich/svelte', () => {
-  it('exports Editor', () => {
-    expect(exports.Editor).toBeDefined();
+  it('exports OpenRichEditor', () => {
+    expect(exports.OpenRichEditor).toBeDefined();
   });
 });

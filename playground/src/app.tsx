@@ -1,4 +1,4 @@
-import { Editor } from '@openrich/react';
+import { OpenRichEditor } from '@openrich/react';
 import { StarterKit } from '@openrich/starter-kit';
 import { useState } from 'react';
 import { EditableToggle } from './editable-toggle';
@@ -34,7 +34,7 @@ export function App() {
         <section className="showcase-section">
           <h2>Default (fills container)</h2>
           <div className="editor-card editor-card--full">
-            <Editor
+            <OpenRichEditor
               content={INITIAL_CONTENT}
               extensions={StarterKit}
               editable={editable}
@@ -49,7 +49,7 @@ export function App() {
           <section className="showcase-section">
             <h2>Fixed height, 300px</h2>
             <div className="editor-card" style={{ height: 300 }}>
-              <Editor
+              <OpenRichEditor
                 content={LONG_CONTENT}
                 extensions={StarterKit}
                 editable={editable}
@@ -65,7 +65,7 @@ export function App() {
           <section className="showcase-section">
             <h2>Compact, 180px</h2>
             <div className="editor-card" style={{ height: 180 }}>
-              <Editor
+              <OpenRichEditor
                 content="<p>Small embedded editor with custom class.</p>"
                 extensions={StarterKit}
                 editable={editable}

@@ -1,15 +1,15 @@
 import { createEffect, onCleanup, onMount } from 'solid-js';
-import { OpenRichEditor, isClient } from '@openrich/core';
+import { OpenRichEditor as CoreEditor, isClient } from '@openrich/core';
 import type { EditorProps } from './types';
 import '@openrich/core/src/theme/variables.css';
 
-export function Editor(props: EditorProps) {
+export function OpenRichEditor(props: EditorProps) {
   let containerRef: HTMLDivElement | null = null;
   let editor: OpenRichEditor | null = null;
 
   onMount(() => {
     if (!isClient || !containerRef) return;
-    editor = new OpenRichEditor({
+    editor = new CoreEditor({
       content: props.content,
       extensions: props.extensions,
       editable: props.editable,

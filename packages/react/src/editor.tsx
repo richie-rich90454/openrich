@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { OpenRichEditor, isClient } from '@openrich/core';
+import { OpenRichEditor as CoreEditor, isClient } from '@openrich/core';
 import type { EditorProps } from './types';
 import '@openrich/core/src/theme/variables.css';
 
-export function Editor({
+export function OpenRichEditor({
   content,
   extensions,
   editable = true,
@@ -23,7 +23,7 @@ export function Editor({
   useEffect(() => {
     if (!isClient || !containerRef.current) return;
 
-    const editor = new OpenRichEditor({
+    const editor = new CoreEditor({
       content,
       extensions,
       editable,

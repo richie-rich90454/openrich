@@ -35,3 +35,7 @@ Thumbs.db
 .npm
 *.tgz
 package-lock.hash
+
+# VitePress
+docs/.vitepress/cache
+docs/.vitepress/dist

@@ -6,8 +6,8 @@ vi.mock('./editor.vue', () => ({ default: {} }));
 import * as exports from './index';
 
 describe('@openrich/vue', () => {
-  it('exports Editor', () => {
-    expect(exports.Editor).toBeDefined();
+  it('exports OpenRichEditor', () => {
+    expect(exports.OpenRichEditor).toBeDefined();
   });
 
   it('exports useEditor', () => {

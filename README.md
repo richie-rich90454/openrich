@@ -7,10 +7,10 @@ A universal rich-text editor monorepo — framework-agnostic core with bindings 
 | Package | Description |
 |---------|-------------|
 | `@openrich/core` | Headless editor engine (TipTap/ProseMirror) |
-| `@openrich/react` | React `<Editor>` component |
-| `@openrich/vue` | Vue 3 `<Editor>` component |
-| `@openrich/svelte` | Svelte 5 `<Editor>` component |
-| `@openrich/solid` | SolidJS `<Editor>` component |
+| `@openrich/react` | React `<OpenRichEditor>` component |
+| `@openrich/vue` | Vue 3 `<OpenRichEditor>` component |
+| `@openrich/svelte` | Svelte 5 `<OpenRichEditor>` component |
+| `@openrich/solid` | SolidJS `<OpenRichEditor>` component |
 | `@openrich/vanilla` | Imperative `mount()` / `unmount()` |
 | `@openrich/extensions` | Tree-shakable nodes, marks, and plugins |
 | `@openrich/starter-kit` | Convenience bundle of all extensions |
@@ -24,12 +24,12 @@ npm install @openrich/extensions@latest
 ```
 
 ```tsx
-import { Editor } from '@openrich/react';
+import { OpenRichEditor } from '@openrich/react';
 import { StarterKit } from '@openrich/starter-kit';
 
 function App() {
   return (
-    <Editor
+    <OpenRichEditor
       content="<p>Hello, OpenRich!</p>"
       extensions={[StarterKit]}
       theme="system"
