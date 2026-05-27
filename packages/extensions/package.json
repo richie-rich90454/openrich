@@ -1,0 +1,59 @@
+{
+  "name": "@openrich/extensions",
+  "version": "0.1.0",
+  "description": "Tree-shakable rich-text editor extensions — nodes, marks, and plugins",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@tiptap/extension-bold": "^2.11.0",
+    "@tiptap/extension-code": "^2.11.0",
+    "@tiptap/extension-code-block": "^2.11.0",
+    "@tiptap/extension-document": "^2.11.0",
+    "@tiptap/extension-heading": "^2.11.0",
+    "@tiptap/extension-highlight": "^2.11.0",
+    "@tiptap/extension-history": "^2.11.0",
+    "@tiptap/extension-horizontal-rule": "^2.11.0",
+    "@tiptap/extension-image": "^2.11.0",
+    "@tiptap/extension-italic": "^2.11.0",
+    "@tiptap/extension-link": "^2.11.0",
+    "@tiptap/extension-list-item": "^2.11.0",
+    "@tiptap/extension-bullet-list": "^2.11.0",
+    "@tiptap/extension-ordered-list": "^2.11.0",
+    "@tiptap/extension-paragraph": "^2.11.0",
+    "@tiptap/extension-placeholder": "^2.11.0",
+    "@tiptap/extension-strike": "^2.11.0",
+    "@tiptap/extension-task-item": "^2.11.0",
+    "@tiptap/extension-task-list": "^2.11.0",
+    "@tiptap/extension-text": "^2.11.0",
+    "@tiptap/extension-underline": "^2.11.0",
+    "@tiptap/extension-hard-break": "^2.11.0",
+    "@tiptap/extension-blockquote": "^2.11.0"
+  },
+  "peerDependencies": {
+    "@openrich/core": "^0.1.0"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

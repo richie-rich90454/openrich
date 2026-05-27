@@ -1,0 +1,28 @@
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'OpenRichExtensions',
+      formats: ['es', 'cjs'],
+      fileName: (format) => {
+        if (format === 'es') return 'index.mjs';
+        return 'index.cjs';
+      },
+    },
+    rollupOptions: {
+      external: [
+        /@tiptap\//,
+        /@openrich\//,
+      ],
+      output: {
+        globals: {},
+      },
+    },
+    target: 'es2015',
+    sourcemap: true,
+    minify: false,
+  },
+});

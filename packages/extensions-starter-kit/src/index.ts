@@ -1,0 +1,39 @@
+import {
+  Paragraph, Heading, BulletList, OrderedList, TaskList, TaskItem,
+  CodeBlock, Blockquote, HorizontalRule, Image, HardBreak,
+  Bold, Italic, Underline, Strike, Code, Link, Highlight,
+  Placeholder, Document, Text, History, ListItem,
+} from '@openrich/extensions';
+
+export const StarterKit = [
+  Document,
+  Text,
+  Paragraph,
+  Heading,
+  BulletList,
+  OrderedList,
+  TaskList,
+  TaskItem,
+  CodeBlock,
+  Blockquote,
+  HorizontalRule,
+  Image,
+  HardBreak,
+  Bold,
+  Italic,
+  Underline,
+  Strike,
+  Code,
+  Link,
+  Highlight,
+  Placeholder,
+  History,
+  ListItem,
+];
+
+export {
+  Paragraph, Heading, BulletList, OrderedList, TaskList, TaskItem,
+  CodeBlock, Blockquote, HorizontalRule, Image, HardBreak,
+  Bold, Italic, Underline, Strike, Code, Link, Highlight,
+  Placeholder, Document, Text, History, ListItem,
+};
