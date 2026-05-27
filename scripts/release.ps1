@@ -1,10 +1,15 @@
 param(
   [ValidateSet('stable', 'prerelease')]
   [string]$Mode = 'stable',
-  [string]$Tag = 'next'
+  [string]$Tag = 'next',
+  [string]$Otp = ''
 )
 
 $ErrorActionPreference = 'Stop'
+
+if ($Otp) {
+  $env:CHANGESETS_PUBLISH_OTP = $Otp
+}
 
 if ($Mode -eq 'prerelease') {
   Write-Host "=== Entering prerelease mode (tag: $Tag) ===" -ForegroundColor Cyan

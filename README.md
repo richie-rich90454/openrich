@@ -76,39 +76,43 @@ npm run lint
 
 All `@openrich/*` packages are versioned together using Changesets.
 
-### Stable release
+### Prerequisites
+
+1. Create the `@openrich` org on [npmjs.com](https://www.npmjs.com) if it doesn't exist
+2. Run `npm login` once — this caches your session so you won't be prompted 9 times
+3. If you have 2FA enabled, set `CHANGESETS_PUBLISH_OTP=<code>` — changesets passes it to all 9 packages automatically
+
+### One-command workflows
 
 ```bash
-# Create a changeset (interactive)
-npm run changeset
+# Auth once, then publish
+npm login
+CHANGESETS_PUBLISH_OTP=123456 npm run publish:prerelease
+```
 
-# Apply changesets and bump versions
-npm run version-packages
+The interactive `changeset` step pauses for you to describe changes, then the chain continues automatically.
 
-# Build and publish all packages to npm
-npm run release
+### Stable release (manual steps)
+
+```bash
+npm run changeset           # interactive — describe changes
+npm run version-packages    # bump all 9 packages in sync
+CHANGESETS_PUBLISH_OTP=123456 npm run release  # build + publish
 ```
 
 ### Prerelease (e.g., `1.0.0-next.1`)
 
 ```bash
-# Enter prerelease mode
 npm run enter-prerelease next
-
-# Create a changeset
 npm run changeset
-
-# Bump to prerelease versions
 npm run version-packages
+CHANGESETS_PUBLISH_OTP=123456 npm run release
 
-# Build and publish with the `next` dist-tag
-npm run release
-
-# When ready for stable, exit prerelease mode
+# When ready for stable:
 npx changeset pre exit
 ```
 
-All packages publish with `@latest` dist-tag by default. Prereleases use the `next` dist-tag, so users install them via `npm install @openrich/core@next`.
+**`CHANGESETS_PUBLISH_OTP`** is the key — changesets reads this env var and passes `--otp=<code>` to every `npm publish` call, so you authenticate once instead of 9 times.
 
 ## License
 
