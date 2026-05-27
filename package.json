@@ -1,6 +1,6 @@
 {
   "name": "openrich",
-  "private": false,
+  "private": true,
   "workspaces": [
     "packages/*",
     "playground"
@@ -11,10 +11,15 @@
     "lint": "biome check packages/*/src playground/src",
     "lint:fix": "biome check --apply packages/*/src playground/src",
     "typecheck": "tsc --noEmit",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build && changeset publish",
+    "prerelease": "changeset pre enter"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
+    "@changesets/cli": "^2.31.0",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@types/node": "^25.9.1",
     "@types/react": "^19.2.15",

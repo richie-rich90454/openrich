@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.4/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [
+    ["@openrich/core", "@openrich/extensions", "@openrich/starter-kit", "@openrich/ssr-utils", "@openrich/react", "@openrich/vue", "@openrich/svelte", "@openrich/solid", "@openrich/vanilla"]
+  ],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["openrich-playground"]
+}

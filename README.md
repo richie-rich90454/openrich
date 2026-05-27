@@ -72,6 +72,44 @@ npm run typecheck
 npm run lint
 ```
 
+## Publishing
+
+All `@openrich/*` packages are versioned together using Changesets.
+
+### Stable release
+
+```bash
+# Create a changeset (interactive)
+npm run changeset
+
+# Apply changesets and bump versions
+npm run version-packages
+
+# Build and publish all packages to npm
+npm run release
+```
+
+### Prerelease (e.g., `1.0.0-next.1`)
+
+```bash
+# Enter prerelease mode
+npm run prerelease next
+
+# Create a changeset
+npm run changeset
+
+# Bump to prerelease versions
+npm run version-packages
+
+# Build and publish with the `next` dist-tag
+npm run release
+
+# When ready for stable, exit prerelease mode
+npx changeset pre exit
+```
+
+All packages publish with `@latest` dist-tag by default. Prereleases use the `next` dist-tag, so users install them via `npm install @openrich/core@next`.
+
 ## License
 
 MIT
