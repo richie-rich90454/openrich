@@ -28,7 +28,7 @@
         "clean": "rm -rf dist"
     },
     "dependencies": {
-        "@tiptap/core": "^2.11.0",
+        "@tiptap/core": "^3.30.4",
         "@tiptap/pm": "^2.11.0",
         "prosemirror-model": "^1.24.0",
         "prosemirror-view": "^1.37.0",
@@ -41,7 +41,7 @@
         "prosemirror-markdown": "^1.13.0"
     },
     "peerDependencies": {
-        "@tiptap/core": "^2.11.0"
+        "@tiptap/core": "^3.30.4"
     },
     "license": "MIT",
     "publishConfig": {
